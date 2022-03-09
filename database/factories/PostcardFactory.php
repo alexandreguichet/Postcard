@@ -9,13 +9,14 @@ class PostcardFactory extends Factory
             (
                 postcard_id 		INTEGER,
                 teacher_id  		INTEGER,
-                ta_id			INTEGER,
-                student_id		INTEGER,
+                ta_id			    INTEGER,
+                student_id		    INTEGER,
                 assignment_id		INTEGER NOT NULL,
                 postcard_created_on	DATE NOT NULL,
                 picture_back		CHAR(100),
                 picture_front		CHAR(100),
-                description	CHAR(100),
+                description	        CHAR(250),
+                title               CHAR(50),
                 PRIMARY KEY (postcard_id));';
 
         static::execute($sql);
