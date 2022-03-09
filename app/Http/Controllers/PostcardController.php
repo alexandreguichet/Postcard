@@ -35,7 +35,8 @@ class PostcardController extends Controller
      */
     public function store(Request $request)
     {
-
+        $postcard = 'true!';
+        return response()->json(['postcards' => $postcard]);
     }
 
     /**
