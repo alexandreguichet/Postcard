@@ -10,10 +10,8 @@
 
 <script>
 export default {
-    name: "DashboardNavigation"
 }
 </script>
 
 <style>
-
 </style>

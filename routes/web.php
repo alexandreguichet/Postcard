@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PostcardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group([
+    'prefix' => 'api',
+], function ($router) {
+    Route::resource('postcards', PostcardController::class);
+});
