@@ -10,10 +10,12 @@
 
 <script>
 import Postcards from "./Postcards";
+import Tiptap from "./Tiptap";
 
 export default {
     components: {
         Postcards,
+        Tiptap,
     },
     data: function () {
         return {
