@@ -5473,6 +5473,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['postcard'],
   data: function data() {
@@ -29179,76 +29188,120 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "mt-10 pt-6 text-xl font-bold" }, [
+    _c("div", { staticClass: "mt-10 pt-8 ml-10 text-2xl font-bold" }, [
       _vm._v("\n        " + _vm._s(_vm.postcard.title) + "\n    "),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "pb-8" }, [
-      _c("div", { staticClass: "mt-4 text-gray-800" }, [
+      _c("div", { staticClass: "mt-4 ml-10 text-gray-800" }, [
         _vm._v(
           "\n            " + _vm._s(_vm.postcard.description) + "\n        "
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "flex m-auto grid grid-cols-6 gap-4" }, [
+      _c("div", { staticClass: "m-auto" }, [
         !_vm.face
-          ? _c(
-              "button",
-              {
-                staticClass: "col-span-1",
-                on: {
-                  click: function ($event) {
-                    $event.preventDefault()
-                    _vm.face = !_vm.face
+          ? _c("div", { staticClass: "grid grid-cols-10 gap-4 pb-8 pt-8" }, [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      _vm.face = !_vm.face
+                    },
                   },
                 },
-              },
-              [_vm._v("\n                Arrow to Front\n            ")]
-            )
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "h-16",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 256 512",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d: "M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z",
+                        },
+                      }),
+                    ]
+                  ),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-span-8" }, [
+                _c(
+                  "div",
+                  { staticClass: "pb-2 font-bold text-center italic text-xl" },
+                  [
+                    _vm._v(
+                      "\n                        Back of postcard\n                    "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "shadow-lg rounded-md",
+                  attrs: { src: _vm.postcard.picture_back, width: "800" },
+                }),
+              ]),
+            ])
           : _vm._e(),
         _vm._v(" "),
         _vm.face
-          ? _c("div", { staticClass: "pb-8 pt-8 justify-center" }, [
-              _c("div", { staticClass: "pb-2 font-bold text-center italic" }, [
-                _vm._v(
-                  "\n                    Front of postcard " +
-                    _vm._s(_vm.face) +
-                    "\n                "
+          ? _c("div", { staticClass: "grid grid-cols-10 gap-4 pb-8 pt-8" }, [
+              _c("div", { staticClass: "col-start-2 col-span-8" }, [
+                _c(
+                  "div",
+                  { staticClass: "pb-2 font-bold text-center italic text-xl" },
+                  [
+                    _vm._v(
+                      "\n                        Front of postcard\n                    "
+                    ),
+                  ]
                 ),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "shadow-lg rounded-md",
+                  attrs: { src: _vm.postcard.picture_front, width: "800" },
+                }),
               ]),
               _vm._v(" "),
-              _c("img", {
-                staticClass: "shadow-lg rounded-md col-start-2 col-span-5",
-                attrs: { src: _vm.postcard.picture_front, width: "800" },
-              }),
-            ])
-          : _c("div", { attrs: { cpass: "pb-8 pt-8 justify-center" } }, [
-              _c("div", { staticClass: "pb-2 font-bold text-center italic" }, [
-                _vm._v(
-                  "\n                    Back of postcard\n                "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("img", {
-                staticClass: "shadow-lg rounded-md col-start-2 col-span-5",
-                attrs: { src: _vm.postcard.picture_back, width: "800" },
-              }),
-            ]),
-        _vm._v(" "),
-        _vm.face
-          ? _c(
-              "button",
-              {
-                staticClass: "col-end-7 col-span-1",
-                on: {
-                  click: function ($event) {
-                    $event.preventDefault()
-                    _vm.face = !_vm.face
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      _vm.face = !_vm.face
+                    },
                   },
                 },
-              },
-              [_vm._v("\n                Arrow to Back\n            ")]
-            )
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "h-16",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 320 512",
+                      },
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d: "M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z",
+                        },
+                      }),
+                    ]
+                  ),
+                ]
+              ),
+            ])
           : _vm._e(),
       ]),
     ]),
