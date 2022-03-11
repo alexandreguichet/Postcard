@@ -19,7 +19,7 @@
                         <div class="pb-2 font-bold text-center italic text-xl">
                             Back of postcard
                         </div>
-                        <img :src="postcard.picture_back" width="800" class="shadow-lg rounded-md">
+                        <img :src="postcard.picture_back" width="800" class="shadow-lg rounded-xl">
                     </div>
                 </div>
                 <div v-if="face" class="grid grid-cols-10 gap-4 pb-8 pt-8">
@@ -27,7 +27,7 @@
                         <div class="pb-2 font-bold text-center italic text-xl">
                             Front of postcard
                         </div>
-                        <img :src="postcard.picture_front" width="800" class="shadow-lg rounded-md">
+                        <img :src="postcard.picture_front" width="800" class="shadow-lg rounded-xl">
                     </div>
                     <button @click.prevent="face = !face">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="h-16">
