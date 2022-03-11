@@ -29,4 +29,47 @@ Vue.component('layout', require('./components/Layout.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data: {
+        student: false,
+        teacher: false,
+        ta: false,
+        user_id: -1,
+    },
+    methods: {
+        logIn(email, password){
+            axios
+                .post('', [email, password])
+                .then(response => {
+                    if(response.data.student){
+                        this.student = true;
+                    } else if(response.data.teacher) {
+                        this.teacher = true;
+                    } else if(response.data.ta){
+                        this.ta = true;
+                    };
+                    this.user_id = response.data.user_id;
+                });
+        },
+        isStudent() {
+            if(this.student){
+                return true;
+            } else {
+                return false;
+            }
+        },
+        isTeacher() {
+            if(this.teacher){
+                return true;
+            } else {
+                return false;
+            }
+        },
+        isTa() {
+            if(this.ta){
+                return true;
+            } else {
+                return false;
+            }
+        },
+    },
 });

@@ -5604,6 +5604,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5611,28 +5643,76 @@ __webpack_require__.r(__webpack_exports__);
       postcard: {
         title: '',
         description: '',
-        assignment_id: '0',
-        picture_front: 'path to picture_front',
-        picture_back: 'path to picture_back'
-      }
+        assignment_id: 0,
+        picture_front: '',
+        picture_back: ''
+      },
+      postcardFrontPreview: null,
+      postcardBackPreview: null
     };
   },
   methods: {
     post: function post() {
+      var _this = this;
+
+      // if(!this.$root.isStudent()){
+      //     return;
+      // }
       //logic to insert postcard into table
-      axios.post('api/postcards', this.postcard).then(function (response) {
-        return console.log('here');
+      var data = new FormData();
+      data.append('picture_front', this.postcard.picture_front);
+      data.append('picture_back', this.postcard.picture_back);
+      data.append('title', this.postcard.title);
+      data.append('description', this.postcard.description);
+      data.append('assignment_id', this.postcard.assignment_id);
+      data.append('user_id', this.$root.user_id);
+      axios.post('api/postcards', data).then(function (response) {
+        _this.cancel();
       });
     },
     cancel: function cancel() {
       this.postcard = {
         title: '',
         description: '',
-        assignment_id: '0',
+        assignment_id: 0,
         picture_front: 'path to picture_front',
         picture_back: 'path to picture_back'
       };
+      this.postcardBackPreview = null;
+      this.postcardFrontPreview = null;
       this.editor = !this.editor;
+    },
+    uploadFrontPicture: function uploadFrontPicture() {
+      var _this2 = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this2.postcardFrontPreview = e.target.result;
+      };
+
+      reader.readAsDataURL(this.$refs.postcardFront.files[0]);
+      this.postcard.picture_front = this.$refs.postcardFront.files[0];
+      console.log(this.postcard.picture_front);
+    },
+    uploadBackPicture: function uploadBackPicture() {
+      var _this3 = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this3.postcardBackPreview = e.target.result;
+      };
+
+      reader.readAsDataURL(this.$refs.postcardBack.files[0]);
+      this.postcard.picture_back = this.$refs.postcardBack.files[0];
+      console.log(this.postcard.picture_back);
+    },
+    selectFrontPicture: function selectFrontPicture() {
+      this.$refs.postcardFront.click();
+    },
+    selectBackPicture: function selectBackPicture() {
+      this.$refs.postcardBack.click();
     }
   }
 });
@@ -5671,7 +5751,52 @@ Vue.component('layout', (__webpack_require__(/*! ./components/Layout.vue */ "./r
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    student: false,
+    teacher: false,
+    ta: false,
+    user_id: -1
+  },
+  methods: {
+    logIn: function logIn(email, password) {
+      var _this = this;
+
+      axios.post('', [email, password]).then(function (response) {
+        if (response.data.student) {
+          _this.student = true;
+        } else if (response.data.teacher) {
+          _this.teacher = true;
+        } else if (response.data.ta) {
+          _this.ta = true;
+        }
+
+        ;
+        _this.user_id = response.data.user_id;
+      });
+    },
+    isStudent: function isStudent() {
+      if (this.student) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isTeacher: function isTeacher() {
+      if (this.teacher) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isTa: function isTa() {
+      if (this.ta) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -29663,6 +29788,98 @@ var render = function () {
                   },
                 },
               }),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-4 flex" }, [
+            _c("div", [
+              _c("h1", { staticClass: "text-lg font-medium text-gray-800" }, [
+                _vm._v("Postcard Front"),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                ref: "postcardFront",
+                staticClass: "hidden",
+                attrs: { type: "file" },
+                on: { change: _vm.uploadFrontPicture },
+              }),
+              _vm._v(" "),
+              _vm.postcardFrontPreview != null
+                ? _c("div", {
+                    staticClass: "block rounded-md w-80 h-40 mt-2",
+                    style:
+                      "background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('" +
+                      _vm.postcardFrontPreview +
+                      "');",
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "mt-2 mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white dark:border-gray-700 dark:bg-gray-700 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
+                    attrs: { href: "#", type: "button" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.selectFrontPicture.apply(null, arguments)
+                      },
+                    },
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Select a Front Picture\n                    "
+                    ),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "ml-8" }, [
+              _c("h1", { staticClass: "text-lg font-medium text-gray-800" }, [
+                _vm._v("Postcard Back"),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                ref: "postcardBack",
+                staticClass: "hidden",
+                attrs: { type: "file" },
+                on: { change: _vm.uploadBackPicture },
+              }),
+              _vm._v(" "),
+              _vm.postcardBackPreview != null
+                ? _c("div", {
+                    staticClass: "block rounded-md w-80 h-40 mt-2",
+                    style:
+                      "background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('" +
+                      _vm.postcardBackPreview +
+                      "');",
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "mt-2 mr-2 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white dark:border-gray-700 dark:bg-gray-700 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800",
+                    attrs: { href: "#", type: "button" },
+                    on: {
+                      click: function ($event) {
+                        $event.preventDefault()
+                        return _vm.selectBackPicture.apply(null, arguments)
+                      },
+                    },
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Select a Back Picture\n                    "
+                    ),
+                  ]
+                ),
+              ]),
             ]),
           ]),
           _vm._v(" "),

@@ -8,9 +8,9 @@ class Factory
 {
 
     /**
-     * Define the model's default state.
+     * Connect PDO to the database
      *
-     * @return array
+     * @return PDO
      */
     private static function connect()
     {
@@ -29,6 +29,4 @@ class Factory
         $statement = $pdo->prepare($sql);
         $statement->execute();
     }
-
-
 }

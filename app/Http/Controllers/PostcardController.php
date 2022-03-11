@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Postcard;
 
 class PostcardController extends Controller
 {
@@ -35,8 +36,23 @@ class PostcardController extends Controller
      */
     public function store(Request $request)
     {
-        $postcard = 'true!';
-        return response()->json(['postcards' => $postcard]);
+
+        $request->file('picture_front')->store('pictures', 'public');
+        $request->file('picture_back')->store('pictures', 'public');
+
+        $data = [
+            'user_id' => $request->user_id,
+            'assignment_id' => $request->assignment_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'picture_front' => $request->picture_front->hashName(),
+            'picture_back' => $request->picture_back->hashName(),
+            'created_at' => date("Y-m-d H:i:s"),
+        ];
+
+        $postcard = Postcard::create($data);
+
+        return response()->json(['postcard' => $postcard]);
     }
 
     /**
