@@ -16,3 +16,6 @@ yarn-error.log
 public/
 .env
 .idea/
+config/auth.php
+composer.json
+routes/channels.php
