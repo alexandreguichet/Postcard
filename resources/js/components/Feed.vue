@@ -1,8 +1,5 @@
 <template>
     <div class=" max-w-5xl m-auto">
-        <div class="mt-8 text-center">
-            <span class="text-red-300 text-4xl font-bold">The feed starts bellow</span>
-        </div>
         <tiptap></tiptap>
         <postcards :postcards="items"></postcards>
     </div>

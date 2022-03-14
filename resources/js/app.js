@@ -33,22 +33,20 @@ const app = new Vue({
         student: false,
         teacher: false,
         ta: false,
-        user_id: -1,
+        user: null,
     },
     methods: {
-        logIn(email, password){
-            axios
-                .post('', [email, password])
-                .then(response => {
-                    if(response.data.student){
-                        this.student = true;
-                    } else if(response.data.teacher) {
-                        this.teacher = true;
-                    } else if(response.data.ta){
-                        this.ta = true;
-                    };
-                    this.user_id = response.data.user_id;
-                });
+        login(data){
+            console.log(data)
+            if(data.userType == 'student'){
+                this.student = true;
+            } else if(data.teacher == 'teacher') {
+                this.teacher = true;
+            } else if(data.ta == 'ta'){
+                this.ta = true;
+            };
+            this.user = data.user;
+            console.log(this.user);
         },
         isStudent() {
             if(this.student){

@@ -6,22 +6,28 @@ use App\Models\DatabaseManager;
 
 class Postcard extends Entity
 {
-    public string $title;
-    public string $description;
-    public string $picture_front;
-    public string $picture_back;
-    public int $assignment_id;
-    public int $user_id;
-    public string $created_at;
+    public string|null $title = null;
+    public string|null $description = null;
+    public string|null $picture_front = null;
+    public string|null $picture_back = null;
+    public int|null $assignment_id = null;
+    public int|null $user_id = null;
+    public string|null $created_at = null;
 
-    public function __construct($data) {
-        $this->title = $data['title'];
-        $this->description = $data['description'];
-        $this->picture_front = $data['picture_front'];
-        $this->picture_back = $data['picture_back'];
-        $this->assignment_id = $data['assignment_id'];
-        $this->user_id = $data['user_id'];
-        $this->created_at = $data['created_at'];
+    public function __construct(array|null $data) {
+        if($data) {
+            $this->title = $data['title'];
+            $this->description = $data['description'];
+            $this->picture_front = $data['picture_front'];
+            $this->picture_back = $data['picture_back'];
+            $this->assignment_id = $data['assignment_id'];
+            $this->user_id = $data['user_id'];
+            $this->created_at = $data['created_at'];
+        }
+    }
+
+    public static function index($data) {
+
     }
 
     public function new(){
@@ -45,4 +51,8 @@ class Postcard extends Entity
     }
 
 
+    static function all()
+    {
+        // TODO: Implement all() method.
+    }
 }

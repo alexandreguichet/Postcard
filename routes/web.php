@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostcardController;
-
+use \App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,4 +27,5 @@ Route::group([
     'prefix' => 'api',
 ], function ($router) {
     Route::resource('postcards', PostcardController::class);
+    Route::get('/login', [UserController::class, 'login']);
 });

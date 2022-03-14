@@ -29,7 +29,11 @@ class DatabaseManager
             $pdo->prepare($sql)->execute($data);
         } elseif (str_contains(strtolower($sql), 'select')) {
             $statement = $pdo->prepare($sql);
-            $statement->execute($data);
+            if($data) {
+                $statement->execute($data);
+            } else {
+                $statement->execute();
+            }
             return $statement->fetchAll();
         }
     }

@@ -36,7 +36,6 @@ class PostcardController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->file('picture_front')->store('pictures', 'public');
         $request->file('picture_back')->store('pictures', 'public');
 
