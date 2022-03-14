@@ -15,7 +15,7 @@ class Factory
     private static function connect()
     {
         try {
-            $pdo = new PDO('mysql:host=127.0.0.1;dbname=postcard', 'root', '');
+            $pdo = new PDO('mysql:host='.env('DB_HOST').';dbname='.env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'));
         } catch (PDOException $e) {
             print("Erreur !: " . $e->getMessage() . "<br/>");
             die();
