@@ -16,4 +16,35 @@ class TeacherFactory extends Factory {
 
         static::execute($sql);
     }
+
+    public static function seedTable()
+    {
+        $sql = 'INSERT INTO teachers(
+                    user_name,
+                    title,
+                    email,
+                    password)
+                VALUES (
+                    \'Romain\',
+                    \'P.Eng\',
+                    \'romain@gmail.com\',
+                    \'password\'
+                 )';
+
+        static::execute($sql);
+
+        $sql = 'INSERT INTO teachers(
+                    user_name,
+                    title,
+                    email,
+                    password)
+                VALUES (
+                    \'Amy\',
+                    \'Associate Professor\',
+                    \'amy1@gmail.com\',
+                    \'password\'
+                 )';
+
+        static::execute($sql);
+    }
 }

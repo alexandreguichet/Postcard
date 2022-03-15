@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ta;
 use Database\Factories\BookmarkFactory;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +25,8 @@ class DatabaseSeeder extends Seeder
     private $pdo;
     /**
      * Seed the application's database.
+     *
+     * Use 'php artisan migrate:fresh --seed' to run database creation-seeding
      *
      * @return void
      */
@@ -53,5 +56,7 @@ class DatabaseSeeder extends Seeder
         //Seed values
         StudentFactory::seedTable();
         AssignmentFactory::seedTable();
+        TeacherFactory::seedTable();
+        TAFactory::seedTable();
     }
 }

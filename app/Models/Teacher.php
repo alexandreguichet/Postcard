@@ -29,10 +29,10 @@ class teacher extends Entity
 
     static function index($data)
     {
-        $sql = 'SELECT * FROM students ';
+        $sql = 'SELECT * FROM teachers WHERE ';
         foreach($data as $key => $value){
             $sql .= $key.' = :'.strtolower($key);
-            if($value != end($array)){
+            if($value != end($data)){
                 $sql .= ' AND ';
             }
         }
@@ -41,12 +41,23 @@ class teacher extends Entity
     }
 
     static function all(){
-        $sql = 'SELECT * FROM students';
+        $sql = 'SELECT * FROM teachers';
         return DatabaseManager::execute($sql);
     }
 
-    function new()
+    static function new($data): Entity
     {
-        // TODO: Implement new() method.
+        $sql = 'INSERT INTO teachers(
+                      user_name,
+                      title,
+                      email,
+                      password)
+               VALUES (:user_name,
+                       :title,
+                       :email,
+                       :password)';
+
+        DatabaseManager::execute($sql, $data);
+        return Teacher::getFirst($data);
     }
 }

@@ -5,20 +5,20 @@
                 <button class="text-xl text-gray-50" @click.prevent="userType='student', isLogin=true">LOGIN STUDENT</button>
                 <button class="text-xl text-gray-50 ml-4" @click.prevent="userType='teacher', isLogin=true">LOGIN TEACHER</button>
                 <button class="text-xl text-gray-50 ml-4" @click.prevent="userType='ta', isLogin=true">LOGIN TA</button>
-                <button class="text-xl text-gray-50 ml-4 mr-4" @click.prevent="isCreating = true">CREATE</button>
+                <button class="text-xl text-gray-50 ml-4 mr-4" @click.prevent="isCreating = true">SIGN UP</button>
             </div>
             <div v-else class="items-center flex">
-                <div class="text-xl text-gray-50 mr-4">
-                    Welcome Back {{$root.user.user_name}}
+                <div class="text-xl text-gray-50 mr-6">
+                    Welcome back {{$root.user.user_name}}!
                 </div>
             </div>
         </div>
         <div class="float-right flex items-center" v-else>
             <div class="text-xl text-gray-50 font-bold">{{capUserType}} login</div>
-            <div class="text-gray-50 ml-5 italic">email</div>
-            <input class="ml-3 p-1 rounded-lg" v-model="email">
-            <div class="text-gray-50 ml-5 italic">password</div>
-            <input class="ml-3 p-1 rounded-lg" v-model="password">
+            <div class="text-gray-50 ml-5 mt-0.5 italic">email</div>
+            <input class="ml-3 p-1 pl-2 rounded-lg" v-model="email">
+            <div class="text-gray-50 ml-5 mt-0.5 italic">password</div>
+            <input class="ml-3 p-1 pl-2 rounded-lg" v-model="password">
             <button type="button" @click="login()"
                     class="bg-blue-100 border border-indigo-400 rounded-md shadow-sm py-2 px-4 ml-4 inline-flex justify-center text-sm font-medium
                         hover:bg-blue-200">
@@ -46,6 +46,16 @@
                                     <option value="teacher">Teacher</option>
                                     <option value="ta">TA</option>
                                 </select>
+                            </div>
+                            <div v-if="userType=='teacher'">
+                                <div class="mt-4 font-bold">Title</div>
+                                <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="title">
+                            </div>
+                            <div class="mt-4 font-bold">Name</div>
+                            <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="user_name">
+                            <div v-if="userType=='student'">
+                                <div class="mt-4 font-bold">Student Number</div>
+                                <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="student_number">
                             </div>
                             <div class="mt-4 font-bold">Email</div>
                             <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="email">
@@ -78,6 +88,9 @@ export default {
             userType: 'student',
             email: 'test@gmail.com',
             password: 'password',
+            student_number: '12345678',
+            user_name: 'Bob',
+            title: 'P.eng',
             isLogin: false,
             isCreating: false,
         }
@@ -90,7 +103,7 @@ export default {
     methods: {
         login(){
             axios
-                .get('/api/login', {params: {email: this.email, password: this.password, userType: this.userType}})
+                .get('/api/login', {params: { email: this.email, password: this.password, userType: this.userType}})
                 .then(response => {
                     this.$root.login(response.data);
                     this.cancel();
@@ -104,7 +117,13 @@ export default {
         },
         create() {
             axios
-                .post('/api/signup', {email: this.email, password: this.password, userType: this.userType})
+                .post('/api/signup', {
+                    email: this.email,
+                    password: this.password,
+                    userType: this.userType,
+                    user_name: this.user_name,
+                    student_number: this.student_number,
+                    title: this.title})
                 .then(response => {
                     this.$root.login(response.data);
                     this.cancelCreate();

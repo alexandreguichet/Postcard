@@ -16,4 +16,31 @@ class TAFactory extends Factory
 
         static::execute($sql);
     }
+
+    public static function seedTable()
+    {
+        $sql = 'INSERT INTO teachers(
+                    user_name,
+                    email,
+                    password)
+                VALUES (
+                    \'TA1\',
+                    \'ta1@gmail.com\',
+                    \'password\'
+                 )';
+
+        static::execute($sql);
+
+        $sql = 'INSERT INTO teachers(
+                    user_name,
+                    email,
+                    password)
+                VALUES (
+                    \'Ta2\',
+                    \'ta2@gmail.com\',
+                    \'password\'
+                 )';
+
+        static::execute($sql);
+    }
 }

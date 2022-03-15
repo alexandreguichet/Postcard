@@ -27,14 +27,14 @@ class UserController extends Controller
 
     public function signup(Request $request) {
         if($request->userType == 'student') {
-            $data = ['password' => $request->password, 'email' => $request->email];
+            $data = ['password' => $request->password, 'email' => $request->email, 'student_number' => $request->student_number, 'user_name' => $request->user_name];
             $user = Student::create($data);
         } elseif($request->userType == 'teacher') {
-            $data = ['password' => $request->password, 'email' => $request->email];
-            $user = Teacher::getFirst($data);
+            $data = ['password' => $request->password, 'email' => $request->email, 'user_name' => $request->user_name, 'title' => $request->title];
+            $user = Teacher::create($data);
         } else {
             $data = ['password' => $request->password, 'email' => $request->email];
-            $user = Ta::getFirst($data);
+            $user = Ta::create($data);
         }
 
         return response()->json(['user' => $user, 'userType' => $request->userType]);

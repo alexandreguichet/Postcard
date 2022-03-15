@@ -12,7 +12,6 @@ class Ta extends Entity
 {
     public int|null $user_id = null;
     public string|null $user_name = null;
-    public string|null $student_number = null;
     public string|null $email = null;
     public string|null $password = null;
 
@@ -28,10 +27,10 @@ class Ta extends Entity
 
     static function index($data)
     {
-        $sql = 'SELECT * FROM tas ';
+        $sql = 'SELECT * FROM tas WHERE ';
         foreach($data as $key => $value){
             $sql .= $key.' = :'.strtolower($key);
-            if($value != end($array)){
+            if($value != end($data)){
                 $sql .= ' AND ';
             }
         }
@@ -44,8 +43,17 @@ class Ta extends Entity
         return DatabaseManager::execute($sql);
     }
 
-    function new()
+    static function new($data): Entity
     {
-        // TODO: Implement new() method.
+        $sql = 'INSERT INTO tas(
+                      user_name,
+                      email,
+                      password)
+               VALUES (:user_name,
+                       :email,
+                       :password)';
+
+        DatabaseManager::execute($sql, $data);
+        return Ta::getFirst($data);
     }
 }
