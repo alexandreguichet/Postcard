@@ -24,4 +24,19 @@ class UserController extends Controller
 
         return response()->json(['user' => $user, 'userType' => $request->userType]);
     }
+
+    public function signup(Request $request) {
+        if($request->userType == 'student') {
+            $data = ['password' => $request->password, 'email' => $request->email];
+            $user = Student::create($data);
+        } elseif($request->userType == 'teacher') {
+            $data = ['password' => $request->password, 'email' => $request->email];
+            $user = Teacher::getFirst($data);
+        } else {
+            $data = ['password' => $request->password, 'email' => $request->email];
+            $user = Ta::getFirst($data);
+        }
+
+        return response()->json(['user' => $user, 'userType' => $request->userType]);
+    }
 }

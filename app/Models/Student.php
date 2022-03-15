@@ -45,8 +45,19 @@ class Student extends Entity
         return DatabaseManager::execute($sql);
     }
 
-    function new()
+    static function new($data)
     {
-        // TODO: Implement new() method.
+        $sql = 'INSERT INTO students(
+                      user_name,
+                      student_number,
+                      email,
+                      password)
+               VALUES (:user_name,
+                       :student_number,
+                       :email,
+                       :password)';
+
+        DatabaseManager::execute($sql, $data);
+        return Student::getFirst($data);
     }
 }

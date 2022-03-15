@@ -1,6 +1,9 @@
 <template>
     <div class="bg-gray-100 shadow-lg">
-        <div v-if="!editor" @click="editor = !editor" class="text-center pl-8 pr-8 mt-10 p-6 font-bold text-xl cursor-pointer border border-gray-300 rounded-lg">
+        <div v-if="!editor && !this.$root.user" class="text-center pl-8 pr-8 mt-10 p-6 italic text-xl border border-gray-300 rounded-lg">
+            Login to upload a new postcard
+        </div>
+        <div v-else-if="!editor && this.$root.user" @click="editor = !editor" class="text-center pl-8 pr-8 mt-10 p-6 font-bold text-xl cursor-pointer border border-gray-300 rounded-lg">
             Upload a new postcard
         </div>
         <div v-else class="pl-8 pr-8 mt-10 p-6 rounded-lg">
@@ -91,7 +94,7 @@ export default {
             postcard: {
                 title: '',
                 description: '',
-                assignment_id: 0,
+                assignment_id: 1,
                 picture_front: '',
                 picture_back: '',
             },
@@ -112,7 +115,7 @@ export default {
             data.append('title', this.postcard.title);
             data.append('description', this.postcard.description);
             data.append('assignment_id', this.postcard.assignment_id);
-            data.append('user_id', this.$root.user_id);
+            data.append('user_id', this.$root.user.user_id);
 
             axios
                 .post('api/postcards', data)

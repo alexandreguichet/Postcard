@@ -30,24 +30,28 @@ class Postcard extends Entity
 
     }
 
-    public function new(){
+    public static function new($data){
+        $sql = 'SELECT assignment_id FROM assignments WHERE assignment_id = :assignment_id';
+        $array = DatabaseManager::execute($sql, ['assignment_id' => 1]);
+
         $sql = 'INSERT INTO postcards(
+                      user_id,
+                      assignment_id,
                       title,
                       description,
                       picture_front,
                       picture_back,
-                      assignment_id,
-                      user_id,
                       created_at)
-               VALUES (:title,
+               VALUES ((SELECT user_id FROM students WHERE user_id = :user_id),
+                       (SELECT assignment_id FROM assignments WHERE assignment_id = :assignment_id),
+                       :title,
                        :description,
                        :picture_front,
                        :picture_back,
-                       (SELECT assignment_id FROM assignments WHERE assignment_id = :assignment_id),
-                       (SELECT user_id FROM students WHERE user_id = :user_id),
                        :created_at)';
 
-        DatabaseManager::execute($sql, (array) $this);
+        DatabaseManager::execute($sql, $data);
+        return Postcard::getFirst($data);
     }
 
 

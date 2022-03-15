@@ -6,8 +6,7 @@ abstract class Entity
 {
     public static function create($data): Entity
     {
-        $entity = new static($data);
-        $entity->new();
+        $entity = static::new($data);
         return $entity;
     }
 
@@ -36,7 +35,7 @@ abstract class Entity
         return $entity;
     }
 
-    abstract function new();
+    abstract static function new($data);
     abstract static function index($data);
     abstract static function all();
 }
