@@ -49,5 +49,9 @@ class DatabaseSeeder extends Seeder
         BookmarkFactory::alterTable();
         NotificationFactory::alterTable();
         UserHasFactory::alterTable();
+
+        //Seed values
+        StudentFactory::seedTable();
+        AssignmentFactory::seedTable();
     }
 }

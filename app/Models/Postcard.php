@@ -27,12 +27,18 @@ class Postcard extends Entity
     }
 
     public static function index($data) {
+        $sql = 'SELECT * FROM postcards WHERE ';
+        foreach($data as $key => $value){
+            $sql .= $key.' = :'.strtolower($key);
+            if($value != end($data)){
+                $sql .= ' AND ';
+            }
+        }
 
+        return DatabaseManager::execute($sql, $data);
     }
 
     public static function new($data){
-        $sql = 'SELECT assignment_id FROM assignments WHERE assignment_id = :assignment_id';
-        $array = DatabaseManager::execute($sql, ['assignment_id' => 1]);
 
         $sql = 'INSERT INTO postcards(
                       user_id,
@@ -55,8 +61,8 @@ class Postcard extends Entity
     }
 
 
-    static function all()
-    {
-        // TODO: Implement all() method.
+    static function all(){
+        $sql = 'SELECT * FROM postcards';
+        return DatabaseManager::execute($sql);
     }
 }

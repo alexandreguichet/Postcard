@@ -12,7 +12,7 @@ class NotificationFactory extends Factory
             ta_id				    INTEGER,
             student_id			    INTEGER,
             postcard_id			    INTEGER NOT NULL,
-            notification_created_on	DATE NOT NULL,
+            created_at	            DATETIME NOT NULL,
             excerpt				    CHAR(100),
             `read`				    BIT,
             PRIMARY KEY (postcard_id, student_id, teacher_id, ta_id)

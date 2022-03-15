@@ -8,11 +8,11 @@ class CommentFactory extends Factory {
         $sql = 'CREATE TABLE comments
         (
             comment_id		INTEGER,
-            teacher_id  		INTEGER,
+            teacher_id  	INTEGER,
             ta_id			INTEGER,
             student_id		INTEGER,
             postcard_id		INTEGER NOT NULL,
-            comment_created_on	DATE NOT NULL,
+            created_at	    DATETIME NOT NULL,
             comment			CHAR(100),
             PRIMARY KEY (comment_id)
         );';

@@ -14,7 +14,7 @@ class PostcardFactory extends Factory
                 description	        CHAR(100),
                 picture_front		CHAR(100),
                 picture_back		CHAR(100),
-                created_at	        DATE NOT NULL,
+                created_at	        DATETIME NOT NULL,
                 PRIMARY KEY (postcard_id)
             );';
 

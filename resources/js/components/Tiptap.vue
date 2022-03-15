@@ -127,7 +127,7 @@ export default {
             this.postcard = {
                 title: '',
                 description: '',
-                assignment_id: 0,
+                assignment_id: 1,
                 picture_front: 'path to picture_front',
                 picture_back: 'path to picture_back',
             };
