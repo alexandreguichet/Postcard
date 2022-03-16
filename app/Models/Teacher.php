@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class teacher extends Entity
 {
     public int|null $user_id = null;
-    public string|null $user_name = null;
+    public string|null $name = null;
     public string|null $title = null;
     public string|null $email = null;
     public string|null $password = null;
@@ -20,7 +20,7 @@ class teacher extends Entity
     {
         if($data) {
             $this->user_id = $data['user_id'];
-            $this->user_name = $data['user_name'];
+            $this->name = $data['name'];
             $this->title = $data['title'];
             $this->email = $data['email'];
             $this->password = $data['password'];
@@ -40,7 +40,7 @@ class teacher extends Entity
         return DatabaseManager::execute($sql, $data);
     }
 
-    static function all(){
+    static function fetchAll(){
         $sql = 'SELECT * FROM teachers';
         return DatabaseManager::execute($sql);
     }
@@ -48,16 +48,24 @@ class teacher extends Entity
     static function new($data): Entity
     {
         $sql = 'INSERT INTO teachers(
-                      user_name,
+                      name,
                       title,
                       email,
                       password)
-               VALUES (:user_name,
+               VALUES (:name,
                        :title,
                        :email,
                        :password)';
 
         DatabaseManager::execute($sql, $data);
         return Teacher::getFirst($data);
+    }
+
+    /**
+     * @return $this
+     */
+    public function with(): static
+    {
+        return $this;
     }
 }

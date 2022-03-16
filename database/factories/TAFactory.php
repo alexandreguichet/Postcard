@@ -8,7 +8,7 @@ class TAFactory extends Factory
         $sql = 'CREATE TABLE tas
         (
             user_id 	INTEGER NOT NULL AUTO_INCREMENT,
-            user_name	CHAR(20),
+            name	CHAR(20),
             email       CHAR(20),
             password    CHAR(100),
             PRIMARY KEY (user_id)
@@ -19,8 +19,8 @@ class TAFactory extends Factory
 
     public static function seedTable()
     {
-        $sql = 'INSERT INTO teachers(
-                    user_name,
+        $sql = 'INSERT INTO tas(
+                    name,
                     email,
                     password)
                 VALUES (
@@ -31,8 +31,8 @@ class TAFactory extends Factory
 
         static::execute($sql);
 
-        $sql = 'INSERT INTO teachers(
-                    user_name,
+        $sql = 'INSERT INTO tas(
+                    name,
                     email,
                     password)
                 VALUES (

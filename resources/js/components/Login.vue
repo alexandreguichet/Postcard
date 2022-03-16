@@ -9,7 +9,7 @@
             </div>
             <div v-else class="items-center flex">
                 <div class="text-xl text-gray-50 mr-6">
-                    Welcome back {{$root.user.user_name}}!
+                    Welcome back {{$root.user.name}}!
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                                 <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="title">
                             </div>
                             <div class="mt-4 font-bold">Name</div>
-                            <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="user_name">
+                            <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="name">
                             <div v-if="userType=='student'">
                                 <div class="mt-4 font-bold">Student Number</div>
                                 <input class="p-2 pl-4 rounded-md border border-1 border-gray-500 bg-gray-100 w-full shadow-sm" v-model="student_number">
@@ -89,7 +89,7 @@ export default {
             email: 'test@gmail.com',
             password: 'password',
             student_number: '12345678',
-            user_name: 'Bob',
+            name: 'Bob',
             title: 'P.eng',
             isLogin: false,
             isCreating: false,
@@ -121,7 +121,7 @@ export default {
                     email: this.email,
                     password: this.password,
                     userType: this.userType,
-                    user_name: this.user_name,
+                    name: this.name,
                     student_number: this.student_number,
                     title: this.title})
                 .then(response => {

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\DatabaseManager;
-
 class Postcard extends Entity
 {
     public string|null $title = null;
@@ -13,6 +11,9 @@ class Postcard extends Entity
     public int|null $assignment_id = null;
     public int|null $user_id = null;
     public string|null $created_at = null;
+
+    public Student|null $user = null;
+    public Assignment|null $assignment = null;
 
     public function __construct(array|null $data) {
         if($data) {
@@ -39,7 +40,6 @@ class Postcard extends Entity
     }
 
     public static function new($data){
-
         $sql = 'INSERT INTO postcards(
                       user_id,
                       assignment_id,
@@ -57,12 +57,21 @@ class Postcard extends Entity
                        :created_at)';
 
         DatabaseManager::execute($sql, $data);
-        return Postcard::getFirst($data);
+        return Postcard::first($data);
     }
 
 
-    static function all(){
+    static function fetchAll(){
         $sql = 'SELECT * FROM postcards';
         return DatabaseManager::execute($sql);
+    }
+
+    public function with(): static {
+        $sql = 'SELECT * FROM students WHERE user_id = :user_id';
+        $this->user = new Student(DatabaseManager::execute($sql, ['user_id' => $this->user_id])[0]);
+
+        $sql = 'SELECT * FROM assignments WHERE assignment_id = :assignment_id';
+        $this->assignment = new Assignment(DatabaseManager::execute($sql, ['assignment_id' => $this->assignment_id])[0]);
+        return $this;
     }
 }

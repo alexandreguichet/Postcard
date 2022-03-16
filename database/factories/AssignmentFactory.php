@@ -9,11 +9,11 @@ class AssignmentFactory extends Factory
         (
             assignment_id			INTEGER UNIQUE NOT NULL AUTO_INCREMENT,
             term				    CHAR(10) NOT NULL,
-            assignment_name 		CHAR(20),
+            name 		            CHAR(20),
             open_on				    DATE NOT NULL,
             close_on				DATE NOT NULL,
             description	CHAR(100),
-            PRIMARY KEY (term, assignment_name)
+            PRIMARY KEY (term, name)
         );';
 
         static::execute($sql);
@@ -22,7 +22,7 @@ class AssignmentFactory extends Factory
     public static function seedTable() {
         $sql = 'INSERT INTO assignments(
                         term,
-                        assignment_name,
+                        name,
                         open_on,
                         close_on,
                         description)
@@ -38,7 +38,7 @@ class AssignmentFactory extends Factory
 
         $sql = 'INSERT INTO assignments(
                         term,
-                        assignment_name,
+                        name,
                         open_on,
                         close_on,
                         description)

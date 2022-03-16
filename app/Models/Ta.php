@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Ta extends Entity
 {
     public int|null $user_id = null;
-    public string|null $user_name = null;
+    public string|null $name = null;
     public string|null $email = null;
     public string|null $password = null;
 
@@ -19,7 +19,7 @@ class Ta extends Entity
     {
         if($data) {
             $this->user_id = $data['user_id'];
-            $this->user_name = $data['user_name'];
+            $this->name = $data['name'];
             $this->email = $data['email'];
             $this->password = $data['password'];
         }
@@ -38,7 +38,7 @@ class Ta extends Entity
         return DatabaseManager::execute($sql, $data);
     }
 
-    static function all(){
+    static function fetchAll(){
         $sql = 'SELECT * FROM tas';
         return DatabaseManager::execute($sql);
     }
@@ -46,14 +46,19 @@ class Ta extends Entity
     static function new($data): Entity
     {
         $sql = 'INSERT INTO tas(
-                      user_name,
+                      name,
                       email,
                       password)
-               VALUES (:user_name,
+               VALUES (:name,
                        :email,
                        :password)';
 
         DatabaseManager::execute($sql, $data);
         return Ta::getFirst($data);
+    }
+
+    public function with(): static
+    {
+        return $this;
     }
 }

@@ -58,5 +58,6 @@ class DatabaseSeeder extends Seeder
         AssignmentFactory::seedTable();
         TeacherFactory::seedTable();
         TAFactory::seedTable();
+        PostcardFactory::seedTable();
     }
 }

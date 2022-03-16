@@ -10,7 +10,7 @@ class StudentFactory extends Factory
         $sql = 'CREATE TABLE students
         (
             user_id		    INTEGER NOT NULL AUTO_INCREMENT,
-            user_name		CHAR(20),
+            name		CHAR(20),
             student_number	INTEGER,
             email           CHAR(20),
             password        CHAR(100),
@@ -22,7 +22,7 @@ class StudentFactory extends Factory
 
     public static function seedTable() {
         $sql = 'INSERT INTO students(
-                    user_name,
+                    name,
                     student_number,
                     email,
                     password)
@@ -36,7 +36,7 @@ class StudentFactory extends Factory
         static::execute($sql);
 
         $sql = 'INSERT INTO students(
-                    user_name,
+                    name,
                     student_number,
                     email,
                     password)

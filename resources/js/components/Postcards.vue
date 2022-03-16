@@ -17,12 +17,5 @@ export default {
         Postcard,
         Comments,
     },
-    mounted(){
-        console.log(this.$props.postcards);
-    },
 }
 </script>
-
-<style>
-
-</style>

@@ -14,8 +14,8 @@ class PostcardController extends Controller
      */
     public function index()
     {
-        $postcard = 'true!';
-        return response()->json(['postcards' => $postcard]);
+        $postcards = Postcard::all();
+        return response()->json(['postcards' => $postcards]);
     }
 
     /**

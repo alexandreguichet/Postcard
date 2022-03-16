@@ -13,13 +13,13 @@ class UserController extends Controller
     public function login(Request $request) {
         if($request->userType == 'student') {
             $data = ['password' => $request->password, 'email' => $request->email];
-            $user = Student::getFirst($data);
+            $user = Student::first($data);
         } elseif($request->userType == 'teacher') {
             $data = ['password' => $request->password, 'email' => $request->email];
-            $user = Teacher::getFirst($data);
+            $user = Teacher::first($data);
         } else {
             $data = ['password' => $request->password, 'email' => $request->email];
-            $user = Ta::getFirst($data);
+            $user = Ta::first($data);
         }
 
         return response()->json(['user' => $user, 'userType' => $request->userType]);
@@ -27,13 +27,13 @@ class UserController extends Controller
 
     public function signup(Request $request) {
         if($request->userType == 'student') {
-            $data = ['password' => $request->password, 'email' => $request->email, 'student_number' => $request->student_number, 'user_name' => $request->user_name];
+            $data = ['password' => $request->password, 'email' => $request->email, 'student_number' => $request->student_number, 'name' => $request->name];
             $user = Student::create($data);
         } elseif($request->userType == 'teacher') {
-            $data = ['password' => $request->password, 'email' => $request->email, 'user_name' => $request->user_name, 'title' => $request->title];
+            $data = ['password' => $request->password, 'email' => $request->email, 'name' => $request->name, 'title' => $request->title];
             $user = Teacher::create($data);
         } else {
-            $data = ['password' => $request->password, 'email' => $request->email];
+            $data = ['password' => $request->password, 'email' => $request->email, 'name' => $request->name];
             $user = Ta::create($data);
         }
 

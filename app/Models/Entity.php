@@ -10,32 +10,36 @@ abstract class Entity
         return $entity;
     }
 
-    public static function get($data)
+    public static function get($data): array
     {
         $array = static::index($data);
-        foreach($array as $entity) {
-            $entities[] = new static($entity);
+        foreach($array as $entry) {
+            $entity = new static($entry);
+            $entities[] = $entity->with();
         }
         return $entities; //returns a list of entity
     }
 
-    public static function getAll($data)
+    public static function all(): array
     {
-        $array = static::all();
-        foreach($array as $entity) {
-            $entities[] = new static($entity);
+        $array = static::fetchAll();
+        foreach($array as $entry) {
+            $entity = new static($entry);
+            $entities[] = $entity->with();
         }
         return $entities;
     }
 
-    public static function getFirst($data): Entity
+    public static function first($data): Entity
     {
         $array = static::index($data);
         $entity = new static($array[0]);
+        $entity = $entity->with();
         return $entity;
     }
 
+    abstract public function with(): static;
     abstract static function new($data);
     abstract static function index($data);
-    abstract static function all();
+    protected abstract static function fetchAll();
 }

@@ -23,7 +23,7 @@ class DatabaseManager
         return $pdo;
     }
 
-    public static function execute($sql, $data) {
+    public static function execute($sql, $data = null) {
         $pdo = self::connect();
         if(str_contains(strtolower($sql), 'insert')) {
             $pdo->prepare($sql)->execute($data);
@@ -34,7 +34,7 @@ class DatabaseManager
             } else {
                 $statement->execute();
             }
-            return $statement->fetchAll();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 }
