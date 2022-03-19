@@ -62,7 +62,7 @@ class Postcard extends Entity
 
 
     static function fetchAll(){
-        $sql = 'SELECT * FROM postcards';
+        $sql = 'SELECT * FROM postcards ORDER BY created_at desc';
         return DatabaseManager::execute($sql);
     }
 

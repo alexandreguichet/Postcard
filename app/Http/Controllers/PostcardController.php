@@ -44,8 +44,8 @@ class PostcardController extends Controller
             'assignment_id' => $request->assignment_id,
             'title' => $request->title,
             'description' => $request->description,
-            'picture_front' => $request->picture_front->hashName(),
-            'picture_back' => $request->picture_back->hashName(),
+            'picture_front' => '/storage/pictures/'.$request->picture_front->hashName(),
+            'picture_back' => '/storage/pictures/'.$request->picture_back->hashName(),
             'created_at' => date("Y-m-d H:i:s"),
         ];
 
