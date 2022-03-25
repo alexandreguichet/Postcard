@@ -2,7 +2,7 @@
     <div>
         <div class="mt-10 pt-8 ml-10 text-2xl font-bold">
             {{postcard.title}}
-            <span class="text-sm text-gray-800">by <span class="text-blue-600">{{postcard.user.name}}</span> in <span class="text-blue-600">{{postcard.assignment.name}}</span></span>
+            <span class="text-sm text-gray-800">by <span class="text-blue-400">{{postcard.user.name}}</span> in <span class="text-blue-400">{{postcard.assignment.name}}</span>.</span>
         </div>
         <div class="pb-8">
             <div class="mt-6 ml-10 text-gray-800">
