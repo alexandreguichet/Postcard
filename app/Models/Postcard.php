@@ -27,6 +27,13 @@ class Postcard extends Entity
         }
     }
 
+    /**
+     * Allow us to build queries like:
+     *
+     *  "SELECT * FROM postcards WHERE assignment_id = 1"
+     * OR
+     *  "SELECT * FROM postcards WHERE assignment_id = 1 AND user_id = 1 AND title = 'test'"
+     */
     public static function index($data) {
         $sql = 'SELECT * FROM postcards WHERE ';
         foreach($data as $key => $value){
@@ -67,6 +74,7 @@ class Postcard extends Entity
     }
 
     public function with(): static {
+        //$with = ['students', 'assignments']
         $sql = 'SELECT * FROM students WHERE user_id = :user_id';
         $this->user = new Student(DatabaseManager::execute($sql, ['user_id' => $this->user_id])[0]);
 
