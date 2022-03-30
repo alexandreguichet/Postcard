@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-for="postcard in postcards" class="bg-gray-100 pl-8 pr-8 rounded-xl shadow-lg">
-            <postcard :postcard="postcard"></postcard>
+            <postcard :postcard="postcard" ref="postcard"></postcard>
             <comments></comments>
         </div>
     </div>
@@ -17,5 +17,10 @@ export default {
         Postcard,
         Comments,
     },
+    methods: {
+        remove(postcard) {
+            this.$parent.remove(postcard)
+        },
+    }
 }
 </script>

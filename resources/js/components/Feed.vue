@@ -20,17 +20,25 @@ export default {
         }
     },
     mounted() {
-        console.log('Feed is mounted!')
-
         axios
-            .get('/api/postcards')
+            .get('/api/postcards/')
             .then(response => {
                 for(const postcard of response.data.postcards){
                     this.postcards.push(postcard);
                 }
-                console.log(this.postcards)
             });
-
+    },
+    methods: {
+        remove(postcard) {
+            for(let p of this.postcards){
+                if(postcard.user_id == p.user_id && postcard.assignment_id == p.assignment_id){
+                    const index = this.postcards.indexOf(p)
+                    if(index > -1) {
+                        this.postcards.splice(index, 1)
+                    }
+                }
+            }
+        },
     }
 }
 </script>

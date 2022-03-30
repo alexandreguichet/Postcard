@@ -29,4 +29,6 @@ Route::group([
     Route::resource('postcards', PostcardController::class);
     Route::post('/signup', [UserController::class, 'signup']);
     Route::get('/login', [UserController::class, 'login']);
+    Route::post('postcards/destroy', [PostcardController::class, 'destroy']);
+    Route::post('postcards/update', [PostcardController::class, 'update']);
 });

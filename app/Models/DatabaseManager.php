@@ -25,7 +25,7 @@ class DatabaseManager
 
     public static function execute($sql, $data = null) {
         $pdo = self::connect();
-        if(str_contains(strtolower($sql), 'insert')) {
+        if(str_contains(strtolower($sql), 'insert') || str_contains(strtolower($sql), 'delete') ||str_contains(strtolower($sql), 'update')) {
             $pdo->prepare($sql)->execute($data);
         } elseif (str_contains(strtolower($sql), 'select')) {
             $statement = $pdo->prepare($sql);

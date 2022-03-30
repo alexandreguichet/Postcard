@@ -1,13 +1,27 @@
 <template>
     <div>
-        <div class="mt-10 pt-8 ml-10 text-2xl font-bold">
-            {{postcard.title}}
+        <div class="mt-10 pt-8 ml-10 text-2xl font-bold" v-if="!editing">
+            {{title}}
             <span class="text-sm text-gray-800">by <span class="text-blue-400">{{postcard.user.name}}</span> in <span class="text-blue-400">{{postcard.assignment.name}}</span>.</span>
+            <div class="float-right">
+                <span class="text-sm text-gray-500 cursor-pointer" @click="edit">Edit</span>
+                <span class="text-sm text-red-500 cursor-pointer ml-1" @click="this.destroy">Delete</span>
+            </div>
+        </div>
+        <div v-if="editing" class="mt-10 pt-8 ml-10 text-2xl font-bold flex justify-between">
+            <input class="w-full border-rounded border border-gray-300 p-2 bg-transparent" v-model="title">
+            <div class="float-right p-2" style="width: 11rem;">
+                <span class="text-sm text-blue-500 cursor-pointer" @click="save()">Save</span>
+                <span class="text-sm text-red-500 cursor-pointer ml-1" @click="editing = false">Cancel Editing</span>
+            </div>
         </div>
         <div class="pb-8">
-            <div class="mt-6 ml-10 text-gray-800">
-                {{postcard.description}}
+            <div class="mt-6 ml-10 text-gray-80" v-if="!editing">
+                {{description}}
             </div>
+            <textarea class="mt-6 ml-10 text-gray-800 border-rounded border border-gray-300 p-2 bg-transparent w-11/12 overflow-auto resize-none flex-none min-h-[8rem] h-auto"
+                      v-if="editing" v-model="description" placeholder="description"></textarea>
+
             <div class="m-auto">
                 <div v-if="!face" class="grid grid-cols-10 gap-4 pb-8 pt-8">
                     <button @click.prevent="face = !face">
@@ -47,12 +61,46 @@ export default {
     data: function() {
         return {
             face: true,
+            editing: false,
+            title: '',
+            description: '',
+        }
+    },
+    mounted(){
+        this.title = this.$props.postcard.title
+        this.description = this.$props.postcard.description
+    },
+    watch: {
+        postcard(){
+            this.title = this.$props.postcard.title
+            this.description = this.$props.postcard.description
         }
     },
     methods: {
         rotatePostcard() {
             this.face = !this.face;
-        }
+        },
+        destroy() {
+            axios
+                .post('/api/postcards/destroy', this.$props.postcard)
+                .then(
+                    response => {
+                        this.$parent.remove(response.data.postcard)
+                    });
+        },
+        edit() {
+            this.editing = true
+        },
+        save() {
+            console.log(this.title)
+            this.$props.postcard.title = this.title
+            this.$props.postcard.description = this.description
+
+            this.editing = false
+
+            axios
+                .post('/api/postcards/update', this.$props.postcard)
+        },
     }
 }
 </script>

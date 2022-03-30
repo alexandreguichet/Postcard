@@ -83,9 +83,12 @@ class PostcardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $postcard = Postcard::first(['user_id' => $request->user['user_id'], 'assignment_id' => $request->assignment_id]);
+        $postcard->title = $request->title;
+        $postcard->description = $request->description;
+        $postcard->save();
     }
 
     /**
@@ -94,8 +97,10 @@ class PostcardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $postcard = Postcard::first(['user_id' => $request->user['user_id'], 'assignment_id' => $request->assignment_id]);
+        $postcard->delete();
+        return response()->json(['postcard' => $postcard]);
     }
 }

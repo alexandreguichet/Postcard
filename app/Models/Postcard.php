@@ -38,7 +38,7 @@ class Postcard extends Entity
         $sql = 'SELECT * FROM postcards WHERE ';
         foreach($data as $key => $value){
             $sql .= $key.' = :'.strtolower($key);
-            if($value != end($data)){
+            if($key != array_key_last($data)){
                 $sql .= ' AND ';
             }
         }
@@ -67,6 +67,20 @@ class Postcard extends Entity
         return Postcard::first($data);
     }
 
+    public function delete() {
+        $sql = 'DELETE FROM postcards WHERE user_id = :user_id AND assignment_id = :assignment_id';
+        DatabaseManager::execute($sql, ['user_id' => $this->user_id, 'assignment_id' => $this->assignment_id]);
+    }
+
+    public function save() {
+        $sql = 'UPDATE postcards SET description = :description, title = :title WHERE user_id = :user_id AND assignment_id = :assignment_id';
+        DatabaseManager::execute($sql,
+            ['description'=>$this->description,
+            'title'=>$this->title,
+            'user_id'=>$this->user_id,
+            'assignment_id'=>$this->assignment_id]
+        );
+    }
 
     static function fetchAll(){
         $sql = 'SELECT * FROM postcards ORDER BY created_at desc';
